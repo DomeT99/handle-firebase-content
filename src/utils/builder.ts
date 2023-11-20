@@ -7,10 +7,10 @@ export class FormBuilder {
   }
 
   public addTextField(data: FormText) {
-    this.handleArray(data);
+    return this.handleArray(data);
   }
   public addSelectField(data: FormSelect) {
-    this.handleArray(data);
+    return this.handleArray(data);
   }
   public build() {
     return this.formFields;
