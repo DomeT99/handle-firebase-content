@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { FormBuilder } from "../builder";
+import { FormBuilder } from "../_formBuilder";
 
 test("obj instance", () => {
   const form = new FormBuilder();

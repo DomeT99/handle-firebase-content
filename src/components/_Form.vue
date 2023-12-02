@@ -1,12 +1,11 @@
 <script setup lang="ts">
 // @ts-nocheck
-import { type Option } from "@/utils/types";
 
-const props = defineProps();
+const props = defineProps({ fieldForms: Array });
 </script>
 <template>
   <form>
-    <div v-for="(field, index) in props" :key="index">
+    <div v-for="(field, index) in fieldForms" :key="index">
       <label :for="field.name">{{ field.label }}</label>
       <div class="input-field">
         <input
@@ -27,7 +26,7 @@ const props = defineProps();
       </div>
     </div>
     <div class="input-row">
-      <button type="submit">Submit</button>
+      <v-btn>Submit</v-btn>
     </div>
   </form>
 </template>
