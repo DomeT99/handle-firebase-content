@@ -1,2 +1,16 @@
-<script setup lang="ts"></script>
-<template></template>
+<script setup lang="ts">
+import DefaultLayout from "../../layout/DefaultLayout.vue";
+import LoginForm from "@/components/LoginForm.vue";
+</script>
+
+<template>
+  <DefaultLayout :scrollable="false">
+    <VContainer>
+      <VRow align="center" justify="center" class="h-9">
+        <VCol cols="12" offset="0">
+          <LoginForm />
+        </VCol>
+      </VRow>
+    </VContainer>
+  </DefaultLayout>
+</template>
