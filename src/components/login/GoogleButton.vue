@@ -20,11 +20,9 @@
   box-sizing: border-box;
 }
 
-
 .g-sign-in-button {
   display: inline-block;
   height: 50px;
-  
   color: #000;
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);

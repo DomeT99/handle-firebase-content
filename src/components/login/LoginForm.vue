@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GoogleButton from "../components/GoogleButton.vue";
+import GoogleButton from "./GoogleButton.vue";
 </script>
 <template>
   <VForm>
