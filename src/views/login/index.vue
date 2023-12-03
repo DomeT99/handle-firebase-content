@@ -7,7 +7,7 @@ import LoginForm from "@/components/login/LoginForm.vue";
   <DefaultLayout :scrollable="false">
     <VContainer>
       <VRow align="center" justify="center" class="h-9">
-        <VCol cols="12" offset="0">
+        <VCol cols="12">
           <LoginForm />
         </VCol>
       </VRow>
