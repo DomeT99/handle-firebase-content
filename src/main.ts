@@ -4,6 +4,9 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 
+//Firebase
+import { app } from "./firebase/firebase"
+
 //CSS
 import "./assets/layout.css";
 
@@ -30,4 +33,9 @@ const vuetify = createVuetify({
   },
 });
 
-createApp(App).use(createPinia()).use(router).use(vuetify).mount("#app");
+createApp(App)
+  .use(createPinia())
+  .use(router)
+  .use(vuetify)
+  .use(app)
+  .mount("#app");

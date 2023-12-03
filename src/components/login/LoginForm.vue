@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import { login } from "../../firebase/services";
+import { type Credentials } from "../../utils/types";
+
 import GoogleButton from "./GoogleButton.vue";
+
+const credentials = ref<Credentials>({
+  email: "",
+  password: "",
+});
 </script>
 <template>
   <VForm>
@@ -13,6 +22,7 @@ import GoogleButton from "./GoogleButton.vue";
       <h1 class="mb-10">Login</h1>
       <VForm @submit.prevent>
         <VTextField
+          v-model="credentials.email"
           elevation="1"
           variant="outlined"
           type="email"
@@ -20,6 +30,7 @@ import GoogleButton from "./GoogleButton.vue";
         ></VTextField>
 
         <VTextField
+          v-model="credentials.password"
           elevation="1"
           variant="outlined"
           type="password"
@@ -27,7 +38,9 @@ import GoogleButton from "./GoogleButton.vue";
         ></VTextField>
         <VRow class="mb-8">
           <VCol>
-            <VBtn type="submit" block class="mt-4 bg-primary">Login</VBtn>
+            <VBtn @click="login(credentials)" type="submit" block class="mt-4 bg-primary"
+              >Login</VBtn
+            >
           </VCol>
         </VRow>
         Or
