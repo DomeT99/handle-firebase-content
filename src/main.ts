@@ -5,7 +5,7 @@ import App from "./App.vue";
 import router from "./router";
 
 //Firebase
-import { app } from "./firebase/firebase"
+import { app } from "./firebase/firebase";
 
 //CSS
 import "./assets/layout.css";
@@ -37,5 +37,5 @@ createApp(App)
   .use(createPinia())
   .use(router)
   .use(vuetify)
-  .use(app)
+  .use(app as any)
   .mount("#app");

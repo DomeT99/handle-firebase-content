@@ -1,9 +1,8 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { setLoginRes } from "./utils";
+import { setLoginRes, redirectAfterLogin } from "./utils";
 import { type Credentials } from "@/utils/types";
 
 export async function login(credentials: Credentials) {
-  debugger;
   const { email, password } = credentials;
 
   try {
@@ -11,6 +10,7 @@ export async function login(credentials: Credentials) {
     const signIn = await signInWithEmailAndPassword(auth, email, password);
 
     setLoginRes(signIn);
+    redirectAfterLogin();
   } catch (error: any) {
     console.log(error);
     // const errorCode = error.code;
