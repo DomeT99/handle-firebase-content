@@ -1,11 +1,14 @@
 import { expect, test, describe } from "vitest";
 import { login } from "../services";
+import type { Credentials } from "@/utils/types";
 
 describe("login tests", async () => {
-  await login(
-    import.meta.env.VITE_FIREBASE_EMAIL,
-    import.meta.env.VITE_FIREBASE_PASSWORD
-  );
+  const credentials: Credentials = {
+    email: import.meta.env.VITE_FIREBASE_EMAIL,
+    password: import.meta.env.VITE_FIREBASE_PASSWORD,
+  };
+
+  await login(credentials);
 
   test("token be defined", async () => {
     const token = JSON.parse(localStorage.getItem("token") as string);
@@ -17,5 +20,5 @@ describe("login tests", async () => {
     const user = JSON.parse(localStorage.getItem("user") as string);
 
     expect(user).toBeDefined();
-  }); 
+  });
 });

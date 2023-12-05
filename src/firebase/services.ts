@@ -1,16 +1,25 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { setLoginRes, redirectAfterLogin } from "./utils";
 import { type Credentials } from "@/utils/types";
+import firebase from "firebase/compat/app";
 
 export async function login(credentials: Credentials) {
   const { email, password } = credentials;
 
   try {
     const auth = getAuth();
-    const signIn = await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error: any) {
+    console.log(error);
+    // const errorCode = error.code;
+    // const errorMessage = error.message;
+  }
+}
 
-    setLoginRes(signIn);
-    redirectAfterLogin();
+export function getToken() {
+  try {
+    const auth = firebase.auth();
+
+    return auth.currentUser?.getIdToken().then((token) => token);
   } catch (error: any) {
     console.log(error);
     // const errorCode = error.code;

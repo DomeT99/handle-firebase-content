@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { login } from "../../firebase/services";
-import { type Credentials } from "../../utils/types";
-
+import { useLoginStore } from "@/stores/loginStore";
 import GoogleButton from "./GoogleButton.vue";
 
-const credentials = ref<Credentials>({
-  email: "",
-  password: "",
-});
+const { credentials, triggerLogin } = useLoginStore();
+
 </script>
 <template>
   <VForm>
@@ -38,7 +33,7 @@ const credentials = ref<Credentials>({
         ></VTextField>
         <VRow class="mb-8">
           <VCol>
-            <VBtn @click="login(credentials)" type="submit" block class="mt-4 bg-primary"
+            <VBtn @click="triggerLogin" block class="mt-4 bg-primary"
               >Login</VBtn
             >
           </VCol>
