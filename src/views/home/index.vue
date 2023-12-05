@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import DefaultLayout from "@/layout/DefaultLayout.vue";
+</script>
 <template>
-  <div>CIAOOOOO</div>
+  <DefaultLayout>
+    <div>CIAOOOOO</div>
+  </DefaultLayout>
 </template>
