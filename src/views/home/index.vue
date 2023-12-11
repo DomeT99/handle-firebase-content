@@ -2,7 +2,7 @@
 import DefaultLayout from "@/layout/DefaultLayout.vue";
 </script>
 <template>
-  <DefaultLayout>
+  <DefaultLayout icon="mdi-view-dashboard" title="Home">
     <div>CIAOOOOO</div>
   </DefaultLayout>
 </template>
