@@ -21,8 +21,8 @@ function toggleSideBar() {
     <v-list class="custom-mt-1" density="compact" nav>
       <v-list-item
         prepend-icon="mdi-view-dashboard"
-        title="Home"
-        value="home"
+        title="Dashboard"
+        value="dashboard"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-forum"
