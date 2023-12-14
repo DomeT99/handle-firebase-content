@@ -12,10 +12,10 @@ const { scrollable, icon, title } = defineProps<DefaultLayout>();
 </script>
 <template>
   <Navbar />
-  <v-main :scrollable="scrollable">
-    <Header :icon="icon" :title="title" />
-    <v-sheet>
+  <v-sheet color="#f0f0f0" height="100vh">
+    <v-main :scrollable="scrollable">
+      <Header :icon="icon" :title="title" />
       <slot />
-    </v-sheet>
-  </v-main>
+    </v-main>
+  </v-sheet>
 </template>
