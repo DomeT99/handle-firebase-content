@@ -22,7 +22,7 @@ defineProps<{
           <td>{{ project.id }}</td>
           <td>{{ project.title }}</td>
           <td>{{ project.description }}</td>
-          <td>
+          <td class="cursor-pointer">
             <v-icon color="primary" size="x-large" icon="mdi-magnify" />
           </td>
         </tr>
