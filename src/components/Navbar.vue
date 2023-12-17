@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import router from "@/router";
 import { ref } from "vue";
+import { changeRoute } from "@/utils/utils";
 
 const openMenu = ref<boolean>(false);
 
@@ -8,8 +9,8 @@ function toggleSideBar() {
   openMenu.value = !openMenu.value;
 }
 
-function changeRoute(route: string) {
-  router.push(route);
+function handleRoute(route: string) {
+  changeRoute(route);
   toggleSideBar();
 }
 </script>
@@ -32,13 +33,13 @@ function changeRoute(route: string) {
         prepend-icon="mdi-view-dashboard"
         title="Dashboard"
         value="dashboard"
-        @click="changeRoute('dashboard')"
+        @click="handleRoute('dashboard')"
       ></v-list-item>
       <v-list-item
-        prepend-icon="mdi-forum"
+        prepend-icon="mdi-plus"
         title="Nuovo progetto"
         value="nuovoprogetto"
-        @click="changeRoute('nuovoprogetto')"
+        @click="handleRoute('nuovoprogetto')"
       ></v-list-item>
     </v-list>
   </v-navigation-drawer>
