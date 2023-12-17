@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { type Project } from "../../utils/types";
 
-const { data } = defineProps<{
-  data?: Project[];
+defineProps<{
+  data: Project[];
 }>();
 </script>
 
