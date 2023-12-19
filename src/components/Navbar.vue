@@ -1,23 +1,12 @@
 <script setup lang="ts">
-import router from "@/router";
-import { ref } from "vue";
-import { changeRoute } from "@/utils/utils";
+import { useNavigationStore } from "@/stores/navigationStore";
 
-const openMenu = ref<boolean>(false);
-
-function toggleSideBar() {
-  openMenu.value = !openMenu.value;
-}
-
-function handleRoute(route: string) {
-  changeRoute(route);
-  toggleSideBar();
-}
+const store = useNavigationStore();
 </script>
 <template>
   <v-app-bar color="primary" elevation="10">
     <v-app-bar-nav-icon
-      @click="toggleSideBar"
+      @click="store.toggleSideBar()"
       variant="text"
     ></v-app-bar-nav-icon>
   </v-app-bar>
@@ -25,21 +14,40 @@ function handleRoute(route: string) {
   <v-navigation-drawer
     color="primary"
     elevation="10"
-    v-model="openMenu"
-    :temporary="true"
+    v-model="store.isFixed"
+    :rail="store.rail"
+    permanent
   >
     <v-list class="custom-mt-1" density="compact" nav>
       <v-list-item
         prepend-icon="mdi-view-dashboard"
         title="Dashboard"
         value="dashboard"
-        @click="handleRoute('dashboard')"
+        @click="
+          store.handleRoute(
+            'dashboard',
+            {
+              header: { icon: 'mdi-view-dashboard', title: 'Dashboard' },
+              scrollable: false,
+            },
+            true
+          )
+        "
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-plus"
         title="Nuovo progetto"
         value="nuovoprogetto"
-        @click="handleRoute('nuovoprogetto')"
+        @click="
+          store.handleRoute(
+            'nuovoprogetto',
+            {
+              header: { icon: 'mdi-plus', title: 'Nuovo Progetto' },
+              scrollable: false,
+            },
+            true
+          )
+        "
       ></v-list-item>
     </v-list>
   </v-navigation-drawer>

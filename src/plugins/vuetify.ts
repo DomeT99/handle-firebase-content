@@ -14,8 +14,8 @@ export const vuetify = createVuetify({
       light: {
         dark: false,
         colors: {
-          primary: colors.blue.accent4,
-          secondary: colors.blue.lighten4,
+          primary: "#092635",
+          secondary: "#9EC8B9",
         },
       },
     },
