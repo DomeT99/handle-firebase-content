@@ -1,16 +1,15 @@
 <script setup lang="ts">
-type Header = {
-  title: string;
-  icon?: string;
-};
+import { type Header } from "@/utils/types";
 
-const { title, icon } = defineProps<Header>();
+defineProps<{
+  data: Header;
+}>();
 </script>
 <template>
   <v-toolbar style="text-align: center" color="secondary" border>
     <v-toolbar-title>
-      <v-icon :icon="icon" />
-      {{ title.toUpperCase() }}
+      <v-icon :icon="data.icon" />
+      {{ data.title.toUpperCase() }}
     </v-toolbar-title>
   </v-toolbar>
 </template>

@@ -1,20 +1,17 @@
 <script setup lang="ts">
 import Navbar from "../components/Navbar.vue";
 import Header from "../components/generics/Header.vue";
+import { type DefaultLayout } from "@/utils/types";
 
-type DefaultLayout = {
-  title: string;
-  icon?: string;
-  scrollable?: boolean;
-};
-
-const { scrollable, icon, title } = defineProps<DefaultLayout>();
+defineProps<{
+  data: DefaultLayout;
+}>();
 </script>
 <template>
   <Navbar />
   <v-sheet color="#f0f0f0" height="100vh">
-    <v-main :scrollable="scrollable">
-      <Header :icon="icon" :title="title" />
+    <v-main :scrollable="data.scrollable">
+      <Header :data="data.header" />
       <slot />
     </v-main>
   </v-sheet>

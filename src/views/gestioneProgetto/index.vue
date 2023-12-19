@@ -2,7 +2,11 @@
 import DefaultLayout from "../../layout/DefaultLayout.vue";
 </script>
 <template>
-  <DefaultLayout icon="mdi-plus" title="Nuovo Progetto">
-    
+  <DefaultLayout
+    :data="{
+      header: { icon: 'mdi-plus', title: 'Nuovo Progetto' },
+      scrollable: false,
+    }"
+  >
   </DefaultLayout>
 </template>

@@ -1,5 +1,6 @@
 import { getAllData } from "@/firebase/services";
 import type { Project } from "@/utils/types";
+import { isBlankArray } from "@/utils/utils";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
@@ -11,9 +12,8 @@ export const useDashboardStore = defineStore("dashboardStore", () => {
       projects.value = await getAllData("Projects");
     }
   }
-
   function isBlankProjectsStore() {
-    if (projects.value.length === 0) return true;
+    if (isBlankArray(projects.value)) return true;
     else return false;
   }
 
