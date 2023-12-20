@@ -13,16 +13,16 @@ defineProps<{
         <tr>
           <th class="text-left">Id</th>
           <th class="text-left">Title</th>
-          <th class="text-center">Description</th>
+          <th class="text-left">Description</th>
           <th class="text-center"></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="project in data">
-          <td>{{ project.id }}</td>
-          <td>{{ project.title }}</td>
-          <td>{{ project.description }}</td>
-          <td class="cursor-pointer">
+          <td class="w-25">{{ project.id }}</td>
+          <td class="w-25">{{ project.title }}</td>
+          <td class="w-25 ">{{ project.description }}</td>
+          <td class="cursor-pointer w-25 text-right">
             <v-icon color="primary" size="x-large" icon="mdi-magnify" />
           </td>
         </tr>

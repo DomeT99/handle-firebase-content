@@ -10,9 +10,14 @@ export type Header = {
   icon?: string;
 };
 
+export type Textbox = {
+  label?: string;
+  clearable?: boolean;
+};
+
 //LAYOUT
 export type DefaultLayout = {
-  header: Header; 
+  header: Header;
   scrollable?: boolean;
 };
 
@@ -30,4 +35,8 @@ export type Project = {
 export type ProjectDetails = Project & {
   images: Image[];
   cover: Image;
+};
+export type Filter = {
+  title?: string;
+  description?: string;
 };

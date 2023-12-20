@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DashboardList from "@/views/dashboard/DashboardList.vue";
+import DashboardFilter from "@/views/dashboard/DashboardFilter.vue";
 import Button from "@/components/generics/Button.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import { changeRoute } from "@/utils/utils";
@@ -11,7 +12,7 @@ const store = useDashboardStore();
 onMounted(async () => await store.populateProjects());
 </script>
 <template>
-  <template v-if="store.projects.length === 0">
+  <template v-if="store.projectsOriginal.length === 0">
     <section class="h-100 custom-mt-8">
       <LoadingSpinner />
     </section>
@@ -20,9 +21,12 @@ onMounted(async () => await store.populateProjects());
   <template v-else>
     <section class="custom-mt-3">
       <v-container>
+        <DashboardFilter />
+      </v-container>
+      <v-container>
         <DashboardList :data="store.projects" />
       </v-container>
-      <v-row justify="end" class="custom-mt-8 mr-8">
+      <v-row justify="end" class="mr-8">
         <Button
           :data="{ size: 'x-large', icon: 'mdi-plus' }"
           @click="changeRoute('nuovoprogetto')"
