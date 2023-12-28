@@ -42,7 +42,12 @@ const store = useNavigationStore();
           store.handleRoute(
             'nuovoprogetto',
             {
-              header: { icon: 'mdi-plus', title: 'Nuovo Progetto' },
+              header: {
+                icon: 'mdi-plus',
+                title: 'Nuovo Progetto',
+                goBack: true,
+                routeBack: 'dashboard',
+              },
               scrollable: false,
             },
             true

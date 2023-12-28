@@ -9,6 +9,8 @@ export type Button = {
 export type Header = {
   title: string;
   icon?: string;
+  goBack?: boolean;
+  routeBack?: string;
 };
 
 export type Input = {
@@ -24,8 +26,6 @@ export type InputFile = Input & {
 export type DefaultLayout = {
   header: Header;
   scrollable?: boolean;
-  goBack?: boolean;
-  routeBack?: string;
 };
 
 // Projects type associated
