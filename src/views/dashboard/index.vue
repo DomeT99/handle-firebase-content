@@ -32,10 +32,14 @@ onMounted(async () => await dashboardStore.populateProjects());
         <Button
           :data="{ size: 'x-large', icon: 'mdi-plus' }"
           @click="
-            navigationStore.handleRoute('nuovoprogetto', {
-              header: { icon: 'mdi-plus', title: 'Nuovo Progetto' },
-              scrollable: false,
-            })
+            navigationStore.handleRoute(
+              'nuovoprogetto',
+              {
+                header: { icon: 'mdi-plus', title: 'Nuovo Progetto' },
+                scrollable: false,
+              },
+              true
+            )
           "
         />
       </v-row>

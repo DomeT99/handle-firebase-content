@@ -12,10 +12,10 @@ const store = useNavigationStore();
   </v-app-bar>
 
   <v-navigation-drawer
-    color="primary"
-    elevation="10"
     v-model="store.isFixed"
     :rail="store.rail"
+    color="primary"
+    elevation="10"
     permanent
   >
     <v-list class="custom-mt-1" density="compact" nav>

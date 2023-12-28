@@ -22,7 +22,9 @@ export const useNavigationStore = defineStore("navigationStore", () => {
     toggleSideBar(newRail);
   }
   function toggleSideBar(newRail?: boolean) {
-    if (!isUndefined(newRail)) {
+    if (isUndefined(newRail)) {
+      rail.value = !rail.value;
+    } else {
       rail.value = newRail!;
     }
   }

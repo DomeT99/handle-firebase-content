@@ -24,6 +24,8 @@ export type InputFile = Input & {
 export type DefaultLayout = {
   header: Header;
   scrollable?: boolean;
+  goBack?: boolean;
+  routeBack?: string;
 };
 
 // Projects type associated
