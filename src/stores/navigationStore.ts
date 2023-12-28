@@ -18,12 +18,11 @@ export const useNavigationStore = defineStore("navigationStore", () => {
   ) {
     changeRoute(route);
     setLayout(layout);
+
     toggleSideBar(newRail);
   }
   function toggleSideBar(newRail?: boolean) {
-    if (isUndefined(newRail)) {
-      rail.value = !rail.value;
-    } else {
+    if (!isUndefined(newRail)) {
       rail.value = newRail!;
     }
   }
