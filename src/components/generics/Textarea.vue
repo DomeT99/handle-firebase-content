@@ -7,10 +7,10 @@ defineProps<{
 </script>
 
 <template>
-  <v-text-field
+  <v-textarea
     variant="outlined"
     :clearable="data.clearable"
     :label="data.label"
     @input="$emit('update:modelValue', $event.target.value)"
-  ></v-text-field>
+  ></v-textarea>
 </template>

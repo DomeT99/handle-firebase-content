@@ -4,15 +4,20 @@ export type Button = {
   icon?: string;
   label?: string;
   size?: string | number;
+  isFullWidth?: boolean;
 };
 export type Header = {
   title: string;
   icon?: string;
 };
 
-export type Textbox = {
+export type Input = {
   label?: string;
   clearable?: boolean;
+};
+
+export type InputFile = Input & {
+  multiple: boolean;
 };
 
 //LAYOUT

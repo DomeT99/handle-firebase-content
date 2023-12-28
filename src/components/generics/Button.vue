@@ -7,12 +7,18 @@ defineProps<{
 </script>
 <template>
   <template v-if="data.icon !== undefined">
-    <v-btn :icon="data.icon" :size="data.size ?? 'large'" :color="data.color ?? 'primary'"
+    <v-btn
+      :icon="data.icon"
+      :size="data.size ?? 'large'"
+      :color="data.color ?? 'primary'"
   /></template>
 
   <template v-else
-    ><v-btn :size="data.size ?? 'large'" :color="data.color ?? 'primary'">{{
-      data.label
-    }}</v-btn>
+    ><v-btn
+      :width="data.isFullWidth ? '100%' : ''"
+      :size="data.size ?? 'large'"
+      :color="data.color ?? 'primary'"
+      >{{ data.label }}</v-btn
+    >
   </template>
 </template>
