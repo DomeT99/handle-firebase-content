@@ -46,7 +46,6 @@ const store = useNavigationStore();
                 icon: 'mdi-plus',
                 title: 'Nuovo Progetto',
                 goBack: true,
-                routeBack: 'dashboard',
               },
               scrollable: false,
             },

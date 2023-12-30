@@ -39,7 +39,6 @@ onMounted(async () => await dashboardStore.populateProjects());
                   icon: 'mdi-plus',
                   title: 'Nuovo Progetto',
                   goBack: true,
-                  routeBack: 'dashboard',
                 },
                 scrollable: false,
               },

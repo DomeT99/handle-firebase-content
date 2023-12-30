@@ -10,7 +10,6 @@ export type Header = {
   title: string;
   icon?: string;
   goBack?: boolean;
-  routeBack?: string;
 };
 
 export type Input = {
@@ -29,19 +28,14 @@ export type DefaultLayout = {
 };
 
 // Projects type associated
-export type Image = {
-  id: string;
-  src: string;
-  alt?: string;
-};
 export type Project = {
   id: string;
   title: string;
   description: string;
 };
 export type ProjectDetails = Project & {
-  images: Image[];
-  cover: Image;
+  images?: File[];
+  cover?: File[];
 };
 export type Filter = {
   title?: string;

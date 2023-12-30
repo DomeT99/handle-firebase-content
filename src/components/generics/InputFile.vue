@@ -1,4 +1,5 @@
 <script setup lang="ts">
+//Sperimentale
 import type { InputFile } from "@/utils/types";
 
 defineProps<{
@@ -8,11 +9,14 @@ defineProps<{
 <template>
   <v-file-input
     chips
+    counter
+    show-size
     variant="outlined"
+    accept="image/png, image/jpeg, image/bmp"
     prepend-icon="mdi-camera"
     :multiple="data.multiple"
     :label="data.label"
     :clearable="data.clearable"
-    @input="$emit('update:modelValue', $event.target.value)"
+    @change="$emit('update:modelValue', $event.target.files)"
   ></v-file-input>
 </template>
