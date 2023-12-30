@@ -18,6 +18,7 @@ defineProps<{
       :width="data.isFullWidth ? '100%' : ''"
       :size="data.size ?? 'large'"
       :color="data.color ?? 'primary'"
+      :type="data.type ?? 'button'"
       >{{ data.label }}</v-btn
     >
   </template>

@@ -1,5 +1,6 @@
 //GENERIC COMPONENTS
 export type Button = {
+  type?: "button" | "submit" | "reset";
   color?: "primary" | "secondary" | "info" | "warning" | "error" | "success";
   icon?: string;
   label?: string;
@@ -13,6 +14,7 @@ export type Header = {
 };
 
 export type Input = {
+  rules?: any;
   label?: string;
   clearable?: boolean;
 };

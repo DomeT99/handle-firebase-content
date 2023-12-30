@@ -3,18 +3,26 @@ import Textbox from "@/components/generics/Textbox.vue";
 import Textarea from "@/components/generics/Textarea.vue";
 import Button from "@/components/generics/Button.vue";
 import { useProjectsStore } from "@/stores/projectsStore";
+import { ref } from "vue";
 
 const projectsStore = useProjectsStore();
+
+const formReset = ref();
+
+function resetForm() {
+  formReset.value.reset();
+}
 </script>
 
 <template>
   <v-card elevation="5" class="pa-10 custom-pt-6">
-    <v-form>
+    <v-form ref="formReset">
       <v-row justify="center">
         <v-col cols="11">
           <Textbox
             v-model="projectsStore.projectsDetails.title"
             :data="{
+              rules: [(title: string) => !!title || 'Il titolo è obbligatorio'],
               label: 'Titolo',
               clearable: true,
             }"
@@ -53,6 +61,7 @@ const projectsStore = useProjectsStore();
             accept="image/png, image/jpeg, image/bmp"
             prepend-icon="mdi-camera"
             label="Inserisci le immagini"
+            :rules="[(images: File[]) => images.length > 0 || 'Le immagini sono obbligatorie']"
             :multiple="true"
             :clearable="true"
           ></v-file-input>
@@ -62,6 +71,7 @@ const projectsStore = useProjectsStore();
         <v-col cols="4">
           <Button
             :data="{
+              type: 'submit',
               label: 'Salva',
               size: 'x-large',
               isFullWidth: true,
@@ -75,6 +85,7 @@ const projectsStore = useProjectsStore();
               size: 'x-large',
               isFullWidth: true,
             }"
+            @click="resetForm"
           />
         </v-col>
       </v-row>
