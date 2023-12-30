@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { type Header } from "@/utils/types";
-import Button from "./generics/Button.vue";
 import { useNavigationStore } from "@/stores/navigationStore";
 
 const navigationStore = useNavigationStore();

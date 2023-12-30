@@ -26,7 +26,7 @@ onMounted(async () => await dashboardStore.populateProjects());
         <DashboardFilter />
       </v-container>
       <v-container>
-        <DashboardList :data="dashboardStore.projects" />
+        <DashboardList />
       </v-container>
       <v-row justify="end" class="mr-8">
         <Button

@@ -12,6 +12,25 @@ export const useDashboardStore = defineStore("dashboardStore", () => {
     description: "",
   });
 
+  async function populateProjects() {
+    if (isBlankProjectsStore()) {
+      projects.value = await getAllData("Projects");
+      projectsOriginal.value = projects.value;
+    }
+  }
+  function isBlankProjectsStore() {
+    if (isBlankArray(projects.value)) return true;
+    else return false;
+  }
+  function searchOnList() {
+    projects.value = projects.value.filter(
+      (item) =>
+        item.title.toLowerCase().includes(filter.value.title!.toLowerCase()) &&
+        item.description
+          .toLowerCase()
+          .includes(filter.value.description!.toLowerCase())
+    );
+  }
   function setFilter(setFilter: Filter) {
     if (!isUndefined(setFilter.title) && !isEmptyString(setFilter.title!)) {
       filter.value.title = setFilter.title;
@@ -30,25 +49,6 @@ export const useDashboardStore = defineStore("dashboardStore", () => {
       title: "",
       description: "",
     };
-  }
-  function searchOnList() {
-    projects.value = projects.value.filter(
-      (item) =>
-        item.title.toLowerCase().includes(filter.value.title!.toLowerCase()) &&
-        item.description
-          .toLowerCase()
-          .includes(filter.value.description!.toLowerCase())
-    );
-  }
-  async function populateProjects() {
-    if (isBlankProjectsStore()) {
-      projects.value = await getAllData("Projects");
-      projectsOriginal.value = projects.value;
-    }
-  }
-  function isBlankProjectsStore() {
-    if (isBlankArray(projects.value)) return true;
-    else return false;
   }
 
   return {

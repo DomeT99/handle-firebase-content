@@ -12,13 +12,11 @@ export type Header = {
   icon?: string;
   goBack?: boolean;
 };
-
 export type Input = {
   rules?: any;
   label?: string;
   clearable?: boolean;
 };
-
 export type InputFile = Input & {
   multiple: boolean;
 };

@@ -29,13 +29,13 @@ const store = useDashboardStore();
       <v-col cols="1">
         <Button
           :data="{ label: 'Cerca', size: 'x-large' }"
-          @click="store.searchOnList()"
+          @click="store.searchOnList"
         />
       </v-col>
       <v-col cols="3">
         <Button
           :data="{ label: 'Reset', size: 'x-large' }"
-          @click="store.resetFilter()"
+          @click="store.resetFilter"
         />
       </v-col>
     </v-row>
