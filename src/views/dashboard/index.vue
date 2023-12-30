@@ -21,12 +21,20 @@ onMounted(async () => await dashboardStore.populateProjects());
   </template>
 
   <template v-else>
-    <section class="custom-mt-3">
+    <section>
       <v-container>
-        <DashboardFilter />
+        <v-row justify="center">
+          <v-col cols="10">
+            <DashboardFilter />
+          </v-col>
+        </v-row>
       </v-container>
       <v-container>
-        <DashboardList />
+        <v-row justify="center">
+          <v-col cols="10">
+            <DashboardList />
+          </v-col>
+        </v-row>
       </v-container>
       <v-row justify="end" class="mr-8">
         <Button
