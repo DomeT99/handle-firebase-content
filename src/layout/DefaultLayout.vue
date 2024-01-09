@@ -9,7 +9,7 @@ defineProps<{
 </script>
 <template>
   <Navbar />
-  <v-sheet color="#f0f0f0" height="100vh">
+  <v-sheet color="#f0f0f0" min-height="110vh">
     <v-main :scrollable="data.scrollable">
       <Header :data="data.header" />
       <slot />
