@@ -1,75 +1,73 @@
-import {
-  type DocumentData,
-  DocumentReference,
-  QuerySnapshot,
-  getDoc,
-} from "firebase/firestore";
-import { type Image, type Project } from "../utils/types";
-import { isBlankArray } from "../utils/utils";
+import { type DocumentData, QuerySnapshot, addDoc, collection, doc, DocumentReference } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { db } from './firebase';
+import { type Image, type Project, type ProjectDetails } from '../utils/types';
+import { isBlankArray } from '@/utils/utils';
 
-/**
- * Handles the data from a query snapshot.
- *
- * @param {QuerySnapshot<DocumentData, DocumentData>} data - The query snapshot containing the data.
- * @return {Project[]} An array of Card objects representing the projects.
- */
-export async function handleData(
-  data: QuerySnapshot<DocumentData, DocumentData>
-) {
-  let projects: Project[] = [];
+export async function handleData(data: QuerySnapshot<DocumentData, DocumentData>): Promise<Project[]> {
+   let projects: Project[] = [];
 
-  const promises = data.docs.map(async (item: any) => {
-    let newItem = {
-      id: item.id,
-      ...item.data(),
-    };
+   const promises = data.docs.map(async (item: any) => {
+      let newItem = {
+         id: item.id,
+         ...item.data()
+      };
 
-    if (newItem.cover) {
-      newItem.cover = await handleCover(newItem.cover);
-    }
+      projects.push(newItem);
+   });
 
-    if (!isBlankArray(newItem.images)) {
-      newItem.images = await handleImages(newItem.images);
-    }
+   await Promise.all(promises);
 
-    projects.push(newItem);
-  });
-
-  await Promise.all(promises);
-
-  return projects;
+   return projects;
 }
 
-/**
- * Retrieves the cover data from the database and returns it with the cover ID.
- *
- * @param {DocumentReference<Image, Image>} cover - The reference to the cover document.
- * @return {Object} - An object containing the cover ID and the cover data.
- */
-async function handleCover(cover: DocumentReference<Image, Image>) {
-  let coverDb = await getDoc<Image, Image>(cover);
+export async function handleProjectRequest(project: ProjectDetails) {
+   try {
+      let coverRef = !isBlankArray(project.cover!) ? await createImageDocument(project.cover![0], 'Cover') : '';
 
-  return {
-    id: coverDb.id,
-    ...coverDb.data(),
-  };
+      let imagesRef: DocumentReference<DocumentData, DocumentData>[] = [];
+      const promises = project.images!.map(async (image) =>
+         imagesRef.push(await createImageDocument(image as File, 'Images'))
+      );
+
+      await Promise.all(promises);
+
+      return {
+         title: project.title!,
+         description: project.description!,
+         cover: coverRef,
+         images: imagesRef
+      };
+   } catch (error) {
+      throw error;
+   }
 }
 
-/**
- * Handles the images by retrieving their corresponding documents from the database.
- *
- * @param {Image[]} images - An array of images to be processed.
- * @return {Promise<any[]>} - A promise that resolves to an array of processed images.
- */
-async function handleImages(images: Image[]) {
-  const imagePromises = images.map(async (image: any) => {
-    const imageDb = await getDoc<Image, Image>(image);
+export async function createImageDocument(
+   image: File,
+   collectionName: string
+): Promise<DocumentReference<DocumentData, DocumentData>> {
+   try {
+      let cover: Image = {
+         src: await uploadImage(image as File),
+         alt: image.name
+      };
 
-    return {
-      id: imageDb.id,
-      ...imageDb.data(),
-    };
-  });
+      let response = await addDoc(collection(db, collectionName), cover);
+      let reference = doc(db, '/' + collectionName + '/' + response.id);
 
-  return await Promise.all(imagePromises);
+      return reference;
+   } catch (error) {
+      throw error;
+   }
+}
+
+export async function uploadImage(file: File): Promise<string> {
+   const storage = getStorage();
+   const storageRef = ref(storage, file.name);
+
+   const snapshot = await uploadBytes(storageRef, file);
+   const url = await getDownloadURL(snapshot.ref);
+
+   return url;
 }

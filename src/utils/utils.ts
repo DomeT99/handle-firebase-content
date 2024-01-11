@@ -9,6 +9,11 @@ export function isUndefined<T>(obj: T) {
   else return false;
 }
 
+export function isNull<T>(obj: T) {
+   if (obj === null) return true;
+   else return false;
+}
+
 export function isBlankArray<T>(arr: T[]) {
   if (arr.length === 0) return true;
   else return false;

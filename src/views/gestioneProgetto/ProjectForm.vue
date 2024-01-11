@@ -16,7 +16,7 @@ function resetForm() {
 
 <template>
   <v-card elevation="5" class="pa-10 custom-pt-6">
-    <v-form ref="formReset">
+    <v-form ref="formReset" @submit.prevent>
       <v-row justify="center">
         <v-col cols="11">
           <Textbox
@@ -53,7 +53,7 @@ function resetForm() {
         </v-col>
         <v-col cols="11">
           <v-file-input
-            v-model="projectsStore.projectsDetails.images"
+            v-model="projectsStore.projectsDetails.images as File[]"
             chips
             counter
             show-size
@@ -75,7 +75,9 @@ function resetForm() {
               label: 'Salva',
               size: 'x-large',
               isFullWidth: true,
+              loading: projectsStore.loader,
             }"
+            @click="projectsStore.saveProject"
           />
         </v-col>
         <v-col cols="4">

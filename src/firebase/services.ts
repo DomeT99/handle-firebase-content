@@ -1,20 +1,24 @@
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "./firebase";
-import { handleData } from "./utils";
+import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { db } from './firebase';
+import { handleData, handleProjectRequest } from './utils';
+import type { ProjectDetails } from '@/utils/types';
 
-/**
- * Retrieves all data from the specified collection.
- *
- * @param {string} nameOfCollection - The name of the collection to retrieve data from.
- * @return {Promise<any>} A promise that resolves with the retrieved data.
- */
 export async function getAllData(nameOfCollection: string) {
-  try {
-    let docs = await getDocs(collection(db, nameOfCollection));
-    let handleDocs = await handleData(docs);
+   try {
+      let docs = await getDocs(collection(db, nameOfCollection));
+      let handleDocs = await handleData(docs);
 
-    return handleDocs;
-  } catch (error) {
-    throw error;
-  }
+      return handleDocs;
+   } catch (error) {
+      throw error;
+   }
+}
+
+export async function createNewProject(project: ProjectDetails) {
+   try {
+      let request = await handleProjectRequest(project);
+      return await addDoc(collection(db, 'Projects'), request);
+   } catch (error) {
+      throw error;
+   }
 }
