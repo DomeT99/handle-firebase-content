@@ -20,6 +20,11 @@ export type Input = {
 export type InputFile = Input & {
    multiple: boolean;
 };
+export type Snackbar = {
+   message: string;
+   timeout?: number;
+   color?: 'primary' | 'secondary' | 'info' | 'warning' | 'error' | 'success';
+};
 
 //LAYOUT
 export type DefaultLayout = {

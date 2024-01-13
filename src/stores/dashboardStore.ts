@@ -5,6 +5,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useDashboardStore = defineStore('dashboardStore', () => {
+   let loader = ref<boolean>(false);
    let projectsOriginal = ref<Project[]>([]);
    let projects = ref<Project[]>([]);
    let filter = ref<Filter>({
@@ -13,10 +14,12 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
    });
 
    async function populateProjects() {
+      loader.value = true;
       if (isBlankProjectsStore()) {
          projects.value = await getAllProjects('Projects');
          projectsOriginal.value = projects.value;
       }
+      loader.value = false;
    }
    function isBlankProjectsStore() {
       if (isBlankArray(projects.value)) return true;
@@ -51,6 +54,7 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
       setFilter,
       searchOnList,
       resetFilter,
+      loader,
       projectsOriginal,
       projects,
       filter

@@ -22,4 +22,3 @@ defineProps<{
       >
    </template>
 </template>
-@/types/types

@@ -21,8 +21,8 @@ export const useProjectsStore = defineStore('projectsStore', () => {
       if (!isNull(response.id) && !isUndefined(response.id)) {
          $reset();
          await getAllProjects('Projects');
-         changeRoute('/dashboard');
       }
+
       loader.value = false;
    }
 
