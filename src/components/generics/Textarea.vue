@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Input } from "@/utils/types";
+import type { Input } from "@/types/components";
 
 defineProps<{
   data: Input;
@@ -15,3 +15,4 @@ defineProps<{
     @input="$emit('update:modelValue', $event.target.value)"
   ></v-textarea>
 </template>
+@/types/types

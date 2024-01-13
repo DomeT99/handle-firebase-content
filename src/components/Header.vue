@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Header } from "@/utils/types";
+import { type Header } from "@/types/components";
 import { useNavigationStore } from "@/stores/navigationStore";
 
 const navigationStore = useNavigationStore();
@@ -35,3 +35,4 @@ defineProps<{
     </v-toolbar-title>
   </v-toolbar>
 </template>
+@/types/types

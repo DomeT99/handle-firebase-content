@@ -1,6 +1,6 @@
 <script setup lang="ts">
 //Sperimentale
-import type { InputFile } from "@/utils/types";
+import type { InputFile } from "@/types/components";
 
 defineProps<{
   data: InputFile;
@@ -20,3 +20,4 @@ defineProps<{
     @change="$emit('update:modelValue', $event.target.files)"
   ></v-file-input>
 </template>
+@/types/types

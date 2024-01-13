@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Button } from '@/utils/types';
+import type { Button } from '@/types/components';
 
 defineProps<{
    data: Button;
@@ -22,3 +22,4 @@ defineProps<{
       >
    </template>
 </template>
+@/types/types

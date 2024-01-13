@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Navbar from "../components/Navbar.vue";
 import Header from "../components/Header.vue";
-import { type DefaultLayout } from "@/utils/types";
+import { type DefaultLayout } from "@/types/components";
 
 defineProps<{
   data: DefaultLayout;
@@ -16,3 +16,4 @@ defineProps<{
     </v-main>
   </v-sheet>
 </template>
+@/types/types

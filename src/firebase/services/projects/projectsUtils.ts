@@ -1,7 +1,7 @@
 import { type DocumentData, QuerySnapshot, addDoc, collection, doc, DocumentReference } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db } from './firebase';
-import { type Image, type Project, type ProjectDetails } from '../utils/types';
+import { db } from '../../firebase';
+import { type Image, type Project, type ProjectDetails } from '@/types/projects';
 import { isBlankArray } from '@/utils/utils';
 
 export async function handleData(data: QuerySnapshot<DocumentData, DocumentData>): Promise<Project[]> {
@@ -20,17 +20,11 @@ export async function handleData(data: QuerySnapshot<DocumentData, DocumentData>
 
    return projects;
 }
-
 export async function handleProjectRequest(project: ProjectDetails) {
    try {
       let coverRef = !isBlankArray(project.cover!) ? await createImageDocument(project.cover![0], 'Cover') : '';
 
-      let imagesRef: DocumentReference<DocumentData, DocumentData>[] = [];
-      const promises = project.images!.map(async (image) =>
-         imagesRef.push(await createImageDocument(image as File, 'Images'))
-      );
-
-      await Promise.all(promises);
+      let imagesRef = await handleImagesRef(project.images!);
 
       return {
          title: project.title!,
@@ -43,7 +37,16 @@ export async function handleProjectRequest(project: ProjectDetails) {
    }
 }
 
-export async function createImageDocument(
+async function handleImagesRef(images: File[] | string[]) {
+   let imagesRef: DocumentReference<DocumentData, DocumentData>[] = [];
+   const promises = images.map(async (image) => imagesRef.push(await createImageDocument(image as File, 'Images')));
+
+   await Promise.all(promises);
+
+   return imagesRef;
+}
+
+async function createImageDocument(
    image: File,
    collectionName: string
 ): Promise<DocumentReference<DocumentData, DocumentData>> {
@@ -62,7 +65,7 @@ export async function createImageDocument(
    }
 }
 
-export async function uploadImage(file: File): Promise<string> {
+async function uploadImage(file: File): Promise<string> {
    const storage = getStorage();
    const storageRef = ref(storage, file.name);
 

@@ -1,4 +1,4 @@
-import type { DefaultLayout } from "@/utils/types";
+import type { DefaultLayout } from "@/types/types";
 import { changeRoute, isUndefined } from "@/utils/utils";
 import { defineStore } from "pinia";
 import { ref } from "vue";

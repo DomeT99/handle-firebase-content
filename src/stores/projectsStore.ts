@@ -1,5 +1,5 @@
-import { createNewProject } from '@/firebase/services';
-import type { ProjectDetails } from '@/utils/types';
+import { createNewProject, getAllProjects } from '@/firebase/services/projects/projectsService';
+import type { ProjectDetails } from '@/types/projects';
 import { isNull, isUndefined, changeRoute } from '@/utils/utils';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -20,6 +20,7 @@ export const useProjectsStore = defineStore('projectsStore', () => {
 
       if (!isNull(response.id) && !isUndefined(response.id)) {
          $reset();
+         await getAllProjects('Projects');
          changeRoute('/dashboard');
       }
       loader.value = false;
