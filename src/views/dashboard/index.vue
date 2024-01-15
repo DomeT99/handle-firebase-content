@@ -5,12 +5,19 @@ import Button from '@/components/generics/Button.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { useNavigationStore } from '@/stores/navigationStore';
+import { useProjectsStore } from '@/stores/projectsStore';
 import { onMounted } from 'vue';
 
 const dashboardStore = useDashboardStore();
 const navigationStore = useNavigationStore();
+const projectsStore = useProjectsStore();
 
-onMounted(async () => await dashboardStore.populateProjects());
+onMounted(async () => {
+   if (projectsStore.isModified) {
+      await dashboardStore.populateProjects();
+      projectsStore.handleModifiedFlag(false);
+   }
+});
 </script>
 
 <template>

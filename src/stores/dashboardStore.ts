@@ -1,6 +1,6 @@
 import { getAllProjects } from '@/firebase/services/projects/projectsService';
 import type { Project, Filter } from '@/types/projects';
-import { isBlankArray, isEmptyString, isUndefined } from '@/utils/utils';
+import { isEmptyString, isUndefined } from '@/utils/utils';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -15,15 +15,11 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
 
    async function populateProjects() {
       loader.value = true;
-      if (isBlankProjectsStore()) {
-         projects.value = await getAllProjects('Projects');
-         projectsOriginal.value = projects.value;
-      }
+
+      projects.value = await getAllProjects('Projects');
+      projectsOriginal.value = projects.value;
+
       loader.value = false;
-   }
-   function isBlankProjectsStore() {
-      if (isBlankArray(projects.value)) return true;
-      else return false;
    }
    function searchOnList() {
       projects.value = projects.value.filter(
