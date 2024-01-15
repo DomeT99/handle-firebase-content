@@ -1,4 +1,4 @@
-import { getAllProjects } from '@/firebase/services/projects/projectsService';
+import { getAllProjects } from '@/firebase/services/dashboard/dashboardService';
 import type { Project, Filter } from '@/types/projects';
 import { isEmptyString, isUndefined } from '@/utils/utils';
 import { defineStore } from 'pinia';

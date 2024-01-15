@@ -23,7 +23,8 @@ const dashboardStore = useDashboardStore();
                   <td class="w-25">{{ project.title }}</td>
                   <td class="w-25">{{ project.description }}</td>
                   <td class="cursor-pointer w-25 text-right">
-                     <v-icon color="primary" size="x-large" icon="mdi-magnify" />
+                     <v-icon color="primary" size="x-large" icon="mdi-pencil" />
+                     <v-icon color="primary" size="x-large" icon="mdi-delete" />
                   </td>
                </tr>
             </template>

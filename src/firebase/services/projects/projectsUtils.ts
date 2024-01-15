@@ -1,25 +1,9 @@
 import { type DocumentData, QuerySnapshot, addDoc, collection, doc, DocumentReference } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db } from '../../firebase';
-import { type Image, type Project, type ProjectDetails } from '@/types/projects';
+import { type Image, type ProjectDetails } from '@/types/projects';
 import { isBlankArray } from '@/utils/utils';
 
-export async function handleData(data: QuerySnapshot<DocumentData, DocumentData>): Promise<Project[]> {
-   let projects: Project[] = [];
-
-   const promises = data.docs.map(async (item: any) => {
-      let newItem = {
-         id: item.id,
-         ...item.data()
-      };
-
-      projects.push(newItem);
-   });
-
-   await Promise.all(promises);
-
-   return projects;
-}
 export async function handleProjectRequest(project: ProjectDetails) {
    try {
       let coverRef = !isBlankArray(project.cover!) ? await createImageDocument(project.cover![0], 'Cover') : '';
