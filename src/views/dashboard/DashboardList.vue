@@ -28,7 +28,7 @@ const dashboardStore = useDashboardStore();
                         color="primary"
                         size="x-large"
                         icon="mdi-delete"
-                        @click="dashboardStore.handleModalDelete" />
+                        @click="dashboardStore.handleModalDelete(project)" />
                   </td>
                </tr>
             </template>

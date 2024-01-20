@@ -31,14 +31,14 @@ onMounted(async () => {
    <template v-else>
       <v-container>
          <v-row justify="center">
-            <v-col cols="12">
+            <v-col cols="11">
                <DashboardFilter />
             </v-col>
          </v-row>
       </v-container>
       <v-container>
          <v-row justify="center">
-            <v-col cols="12">
+            <v-col cols="11">
                <DashboardList />
             </v-col>
          </v-row>

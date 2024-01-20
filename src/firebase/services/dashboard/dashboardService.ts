@@ -1,6 +1,7 @@
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { handleData } from './dashboardUtils';
+import { handleData, handleDeleteData } from './dashboardUtils';
+import type { Project } from '@/types/projects';
 
 export async function getAllProjects(nameOfCollection: string) {
    try {
@@ -8,6 +9,14 @@ export async function getAllProjects(nameOfCollection: string) {
       let handleDocs = await handleData(docs);
 
       return handleDocs;
+   } catch (error) {
+      throw error;
+   }
+}
+
+export async function deleteProject(project: Project) {
+   try {
+      await handleDeleteData(project, db);
    } catch (error) {
       throw error;
    }

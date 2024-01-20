@@ -15,7 +15,7 @@ defineProps<{
          <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn text="Sì" @click="data.onConfirm" />
+            <v-btn :loading="data.loader" text="Sì" @click="data.onConfirm" />
             <v-btn text="No" @click="data.onCancel" />
          </v-card-actions>
       </v-card>

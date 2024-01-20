@@ -7,6 +7,8 @@ export type Project = {
    id: string;
    title: string;
    description: string;
+   images?: any[];
+   cover?: any;
 };
 export type ProjectDetails = Project & {
    images?: File[] | string[];

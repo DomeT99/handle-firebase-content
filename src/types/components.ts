@@ -29,6 +29,7 @@ export type ModalConfirm = {
    title: string;
    message: string;
    width?: string | number;
+   loader: boolean;
    onConfirm: () => void;
    onCancel: () => void;
 };

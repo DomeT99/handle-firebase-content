@@ -1,4 +1,4 @@
-import { getAllProjects } from '@/firebase/services/dashboard/dashboardService';
+import { getAllProjects, deleteProject } from '@/firebase/services/dashboard/dashboardService';
 import type { Project, Filter } from '@/types/projects';
 import { isEmptyString, isUndefined } from '@/utils/utils';
 import { defineStore } from 'pinia';
@@ -8,11 +8,13 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
    let loader = ref<boolean>(false);
    let projectsOriginal = ref<Project[]>([]);
    let projects = ref<Project[]>([]);
+   let currentProject = ref<Project>();
    let filter = ref<Filter>({
       title: '',
       description: ''
    });
    let showModalDelete = ref<boolean>(false);
+   let confirmLoaderDelete = ref<boolean>(false);
 
    async function populateProjects() {
       loader.value = true;
@@ -45,8 +47,17 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
          description: ''
       };
    }
-   function handleModalDelete() {
+   function handleModalDelete(selectedProject: Project) {
       showModalDelete.value = !showModalDelete.value;
+      currentProject.value = selectedProject;
+   }
+   async function deleteCurrentProject() {
+      confirmLoaderDelete.value = true;
+      await deleteProject(currentProject.value!);
+
+      confirmLoaderDelete.value = false;
+      handleModalDelete({} as Project);
+      populateProjects();
    }
 
    return {
@@ -55,10 +66,13 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
       searchOnList,
       resetFilter,
       handleModalDelete,
+      deleteCurrentProject,
       loader,
       projectsOriginal,
       projects,
+      currentProject,
       filter,
-      showModalDelete
+      showModalDelete,
+      confirmLoaderDelete
    };
 });
