@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DashboardList from '@/views/dashboard/DashboardList.vue';
 import DashboardFilter from '@/views/dashboard/DashboardFilter.vue';
+import DashboardModalDelete from './DashboardModalDelete.vue';
 import Button from '@/components/generics/Button.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import { useDashboardStore } from '@/stores/dashboardStore';
@@ -28,39 +29,38 @@ onMounted(async () => {
    </template>
 
    <template v-else>
-      <section>
-         <v-container>
-            <v-row justify="center">
-               <v-col cols="10">
-                  <DashboardFilter />
-               </v-col>
-            </v-row>
-         </v-container>
-         <v-container>
-            <v-row justify="center">
-               <v-col cols="10">
-                  <DashboardList />
-               </v-col>
-            </v-row>
-         </v-container>
-         <v-row justify="end" class="mr-8">
-            <Button
-               :data="{ size: 'x-large', icon: 'mdi-plus' }"
-               @click="
-                  navigationStore.handleRoute(
-                     'nuovoprogetto',
-                     {
-                        header: {
-                           icon: 'mdi-plus',
-                           title: 'Nuovo Progetto',
-                           goBack: true
-                        },
-                        scrollable: false
-                     },
-                     true
-                  )
-               " />
+      <v-container>
+         <v-row justify="center">
+            <v-col cols="12">
+               <DashboardFilter />
+            </v-col>
          </v-row>
-      </section>
+      </v-container>
+      <v-container>
+         <v-row justify="center">
+            <v-col cols="12">
+               <DashboardList />
+            </v-col>
+         </v-row>
+      </v-container>
+      <v-row justify="end" class="mr-8">
+         <Button
+            :data="{ size: 'x-large', icon: 'mdi-plus' }"
+            @click="
+               navigationStore.handleRoute(
+                  'nuovoprogetto',
+                  {
+                     header: {
+                        icon: 'mdi-plus',
+                        title: 'Nuovo Progetto',
+                        goBack: true
+                     },
+                     scrollable: false
+                  },
+                  true
+               )
+            " />
+      </v-row>
+      <DashboardModalDelete v-model="dashboardStore.showModalDelete" />
    </template>
 </template>

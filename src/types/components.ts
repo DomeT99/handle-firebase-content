@@ -25,6 +25,13 @@ export type Snackbar = {
    timeout?: number;
    color?: 'primary' | 'secondary' | 'info' | 'warning' | 'error' | 'success';
 };
+export type ModalConfirm = {
+   title: string;
+   message: string;
+   width?: string | number;
+   onConfirm: () => void;
+   onCancel: () => void;
+};
 
 //LAYOUT
 export type DefaultLayout = {

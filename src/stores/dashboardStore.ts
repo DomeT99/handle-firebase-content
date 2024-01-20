@@ -12,6 +12,7 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
       title: '',
       description: ''
    });
+   let showModalDelete = ref<boolean>(false);
 
    async function populateProjects() {
       loader.value = true;
@@ -44,15 +45,20 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
          description: ''
       };
    }
+   function handleModalDelete() {
+      showModalDelete.value = !showModalDelete.value;
+   }
 
    return {
       populateProjects,
       setFilter,
       searchOnList,
       resetFilter,
+      handleModalDelete,
       loader,
       projectsOriginal,
       projects,
-      filter
+      filter,
+      showModalDelete
    };
 });
