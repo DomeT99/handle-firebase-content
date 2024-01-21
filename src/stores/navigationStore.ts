@@ -17,7 +17,7 @@ export const useNavigationStore = defineStore("navigationStore", () => {
     newRail?: boolean
   ) {
     changeRoute(route);
-    setLayout(layout);
+    _setLayout(layout);
 
     toggleSideBar(newRail);
   }
@@ -28,7 +28,7 @@ export const useNavigationStore = defineStore("navigationStore", () => {
       rail.value = newRail!;
     }
   }
-  function setLayout(layout: DefaultLayout) {
+  function _setLayout(layout: DefaultLayout) {
     currentLayout.value = layout;
   }
 

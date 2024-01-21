@@ -62,8 +62,8 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
 
    return {
       populateProjects,
-      setFilter,
       searchOnList,
+      setFilter,
       resetFilter,
       handleModalDelete,
       deleteCurrentProject,

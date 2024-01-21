@@ -17,12 +17,12 @@ export const useProjectsStore = defineStore('projectsStore', () => {
    let isModified = ref<boolean>(true);
 
    async function saveProject() {
-      if (checkModel()) {
+      if (_checkModel()) {
          loader.value = true;
          let response = await createNewProject(projectsDetails.value);
 
          if (!isNull(response.id) && !isUndefined(response.id)) {
-            $reset();
+            _reset();
             showSnackbarProject();
          }
          loader.value = false;
@@ -35,7 +35,7 @@ export const useProjectsStore = defineStore('projectsStore', () => {
    function showSnackbarProject() {
       showSnackbar.value = true;
    }
-   function $reset() {
+   function _reset() {
       projectsDetails.value = {
          id: '',
          title: '',
@@ -44,7 +44,7 @@ export const useProjectsStore = defineStore('projectsStore', () => {
          cover: []
       };
    }
-   function checkModel() {
+   function _checkModel() {
       if (
          isUndefined(projectsDetails.value.title) ||
          isNull(projectsDetails.value.title) ||
