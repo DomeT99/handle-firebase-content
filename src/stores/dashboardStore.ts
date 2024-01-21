@@ -11,7 +11,8 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
    let currentProject = ref<Project>();
    let filter = ref<Filter>({
       title: '',
-      description: ''
+      description: '',
+      active: false
    });
    let showModalDelete = ref<boolean>(false);
    let confirmLoader = ref<boolean>(false);
@@ -23,9 +24,15 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
       projects.value = await getAllProjects('Projects');
       projectsOriginal.value = projects.value;
 
+      projects.value = projectsOriginal.value.filter((item) => item.active);
+
       loader.value = false;
    }
    function searchOnList() {
+      projects.value = filter.value.active
+         ? projectsOriginal.value
+         : projectsOriginal.value.filter((item) => item.active);
+
       projects.value = projects.value.filter(
          (item) =>
             item.title.toLowerCase().includes(filter.value.title!.toLowerCase()) &&
@@ -40,13 +47,25 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
       if (!isUndefined(setFilter.description) && !isEmptyString(setFilter.description!)) {
          filter.value.description = setFilter.description;
       }
+
+      if (!isUndefined(setFilter.active)) {
+         filter.value.active = setFilter.active;
+         setStatusFilter();
+      }
+   }
+   function setStatusFilter() {
+      projects.value = filter.value.active
+         ? projectsOriginal.value
+         : projectsOriginal.value.filter((item) => item.active);
+      searchOnList();
    }
    function resetFilter() {
-      projects.value = projectsOriginal.value;
       filter.value = {
          title: '',
-         description: ''
+         description: '',
+         active: false
       };
+      setStatusFilter();
    }
    function handleModalDelete(selectedProject: Project) {
       showModalDelete.value = !showModalDelete.value;
@@ -58,6 +77,7 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
 
       confirmLoader.value = false;
       handleModalDelete({} as Project);
+      resetFilter(); 
       populateProjects();
    }
    function handleModalActive(selectedProject: Project) {
@@ -70,6 +90,7 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
 
       confirmLoader.value = false;
       handleModalActive({} as Project);
+      resetFilter(); 
       populateProjects();
    }
 
@@ -77,6 +98,7 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
       populateProjects,
       searchOnList,
       setFilter,
+      setStatusFilter,
       resetFilter,
       handleModalDelete,
       deleteCurrentProject,

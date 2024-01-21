@@ -18,4 +18,5 @@ export type ProjectDetails = Project & {
 export type Filter = {
    title?: string;
    description?: string;
+   active?: boolean;
 };
