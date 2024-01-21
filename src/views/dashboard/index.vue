@@ -2,6 +2,7 @@
 import DashboardList from '@/views/dashboard/DashboardList.vue';
 import DashboardFilter from '@/views/dashboard/DashboardFilter.vue';
 import DashboardModalDelete from './DashboardModalDelete.vue';
+import DashboardModalHandleActive from './DashboardModalHandleActive.vue';
 import Button from '@/components/generics/Button.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import { useDashboardStore } from '@/stores/dashboardStore';
@@ -62,5 +63,6 @@ onMounted(async () => {
             " />
       </v-row>
       <DashboardModalDelete v-model="dashboardStore.showModalDelete" />
+      <DashboardModalHandleActive v-model="dashboardStore.showModalActive" />
    </template>
 </template>

@@ -16,10 +16,11 @@ function closeModal() {
 <template>
    <ModalConfirm
       :data="{
-         message: 'Sei sicuro di voler eliminare questo progetto?',
+         message: `Sei sicuro di voler eliminare ${dashboardStore.currentProject?.title}?`,
          title: 'Elimina Progetto',
+         loader: dashboardStore.confirmLoader,
+         isShowBanner: true,
          onConfirm: deleteProject,
          onCancel: closeModal,
-         loader: dashboardStore.confirmLoaderDelete
       }" />
 </template>

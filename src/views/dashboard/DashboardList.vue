@@ -31,7 +31,11 @@ const dashboardStore = useDashboardStore();
                   </td>
                   <td class="cursor-pointer w-25 text-right">
                      <v-icon color="primary" size="x-large" icon="mdi-pencil" />
-                     <v-icon color="primary" size="x-large" icon="mdi-eye" />
+                     <v-icon
+                        color="primary"
+                        size="x-large"
+                        icon="mdi-eye"
+                        @click="dashboardStore.handleModalActive(project)" />
                      <v-icon
                         color="primary"
                         size="x-large"

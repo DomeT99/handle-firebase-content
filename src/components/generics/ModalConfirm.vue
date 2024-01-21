@@ -8,6 +8,11 @@ defineProps<{
 <template>
    <v-dialog>
       <v-card location="center" :width="data.width ?? 500" :title="data.title">
+         <v-alert
+            v-if="data.isShowBanner ?? false"
+            density="compact"
+            type="error"
+            text="NB: Questa azione sarà irreversibile"></v-alert>
          <v-card-text>
             {{ data.message }}
          </v-card-text>

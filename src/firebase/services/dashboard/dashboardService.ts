@@ -1,4 +1,4 @@
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { handleData, handleDeleteData } from './dashboardUtils';
 import type { Project } from '@/types/projects';
@@ -17,6 +17,16 @@ export async function getAllProjects(nameOfCollection: string) {
 export async function deleteProject(project: Project) {
    try {
       await handleDeleteData(project, db);
+   } catch (error) {
+      throw error;
+   }
+}
+
+export async function setProjectStatus(project: Project) {
+   try {
+      await updateDoc(doc(db, 'Projects', project.id), {
+         active: !project.active
+      });
    } catch (error) {
       throw error;
    }

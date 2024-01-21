@@ -1,4 +1,4 @@
-import { getAllProjects, deleteProject } from '@/firebase/services/dashboard/dashboardService';
+import { getAllProjects, deleteProject, setProjectStatus } from '@/firebase/services/dashboard/dashboardService';
 import type { Project, Filter } from '@/types/projects';
 import { isEmptyString, isUndefined } from '@/utils/utils';
 import { defineStore } from 'pinia';
@@ -14,7 +14,8 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
       description: ''
    });
    let showModalDelete = ref<boolean>(false);
-   let confirmLoaderDelete = ref<boolean>(false);
+   let confirmLoader = ref<boolean>(false);
+   let showModalActive = ref<boolean>(false);
 
    async function populateProjects() {
       loader.value = true;
@@ -52,11 +53,23 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
       currentProject.value = selectedProject;
    }
    async function deleteCurrentProject() {
-      confirmLoaderDelete.value = true;
+      confirmLoader.value = true;
       await deleteProject(currentProject.value!);
 
-      confirmLoaderDelete.value = false;
+      confirmLoader.value = false;
       handleModalDelete({} as Project);
+      populateProjects();
+   }
+   function handleModalActive(selectedProject: Project) {
+      showModalActive.value = !showModalActive.value;
+      currentProject.value = selectedProject;
+   }
+   async function setCurrentProjectStatus() {
+      confirmLoader.value = true;
+      await setProjectStatus(currentProject.value!);
+
+      confirmLoader.value = false;
+      handleModalActive({} as Project);
       populateProjects();
    }
 
@@ -67,12 +80,15 @@ export const useDashboardStore = defineStore('dashboardStore', () => {
       resetFilter,
       handleModalDelete,
       deleteCurrentProject,
+      handleModalActive,
+      setCurrentProjectStatus,
       loader,
       projectsOriginal,
       projects,
       currentProject,
       filter,
       showModalDelete,
-      confirmLoaderDelete
+      confirmLoader,
+      showModalActive
    };
 });

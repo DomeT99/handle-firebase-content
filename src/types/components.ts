@@ -28,6 +28,7 @@ export type Snackbar = {
 export type ModalConfirm = {
    title: string;
    message: string;
+   isShowBanner?: boolean;
    width?: string | number;
    loader: boolean;
    onConfirm: () => void;
