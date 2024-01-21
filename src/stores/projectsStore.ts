@@ -1,6 +1,6 @@
 import { createNewProject } from '@/firebase/services/projects/projectsService';
 import type { ProjectDetails } from '@/types/projects';
-import { isNull, isUndefined } from '@/utils/utils';
+import { isBlankArray, isEmptyString, isNull, isUndefined } from '@/utils/utils';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -17,15 +17,17 @@ export const useProjectsStore = defineStore('projectsStore', () => {
    let isModified = ref<boolean>(true);
 
    async function saveProject() {
-      loader.value = true;
-      let response = await createNewProject(projectsDetails.value);
+      if (checkModel()) {
+         loader.value = true;
+         let response = await createNewProject(projectsDetails.value);
 
-      if (!isNull(response.id) && !isUndefined(response.id)) {
-         $reset();
-         showSnackbarProject();
+         if (!isNull(response.id) && !isUndefined(response.id)) {
+            $reset();
+            showSnackbarProject();
+         }
+         loader.value = false;
+         handleModifiedFlag(true);
       }
-      loader.value = false;
-      handleModifiedFlag(true);
    }
    function handleModifiedFlag(newValue: boolean) {
       isModified.value = newValue;
@@ -41,6 +43,19 @@ export const useProjectsStore = defineStore('projectsStore', () => {
          images: [],
          cover: []
       };
+   }
+   function checkModel() {
+      if (
+         isUndefined(projectsDetails.value.title) ||
+         isNull(projectsDetails.value.title) ||
+         isEmptyString(projectsDetails.value.title)
+      ) {
+         return false;
+      }
+      if (isBlankArray(projectsDetails.value.images!)) {
+         return false;
+      }
+      return true;
    }
 
    return { projectsDetails, showSnackbar, loader, isModified, saveProject, handleModifiedFlag };

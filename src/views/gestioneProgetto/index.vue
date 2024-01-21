@@ -9,7 +9,7 @@ const projectsStore = useProjectsStore();
 <template>
    <v-container class="custom-mt-3">
       <v-row justify="center">
-         <v-col cols="8">
+         <v-col cols="9">
             <ProjectForm />
          </v-col>
       </v-row>

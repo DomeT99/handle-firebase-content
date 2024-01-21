@@ -1,5 +1,5 @@
 import type { Project } from '@/types/projects';
-import { isBlankArray } from '@/utils/utils';
+import { isBlankArray, isTypeOf } from '@/utils/utils';
 import { Firestore, deleteDoc, doc, type DocumentData, type QuerySnapshot } from 'firebase/firestore';
 
 export async function handleData(data: QuerySnapshot<DocumentData, DocumentData>): Promise<Project[]> {
@@ -20,7 +20,7 @@ export async function handleData(data: QuerySnapshot<DocumentData, DocumentData>
 }
 
 export async function handleDeleteData(project: Project, db: Firestore): Promise<void> {
-   if (typeof project.cover !== 'string') {
+   if (!isTypeOf(project.cover, 'string')) {
       const reference = doc(db, 'Cover', project.cover.id);
       await deleteDoc(reference);
    }
