@@ -9,6 +9,7 @@ export const useProjectsStore = defineStore('projectsStore', () => {
       id: '',
       title: '',
       description: '',
+      active: true,
       images: [],
       cover: []
    });
@@ -40,6 +41,7 @@ export const useProjectsStore = defineStore('projectsStore', () => {
          id: '',
          title: '',
          description: '',
+         active: true,
          images: [],
          cover: []
       };

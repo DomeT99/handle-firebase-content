@@ -7,6 +7,7 @@ export type Project = {
    id: string;
    title: string;
    description: string;
+   active: boolean;
    images?: any[];
    cover?: any;
 };

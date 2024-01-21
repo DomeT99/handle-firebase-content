@@ -33,6 +33,11 @@ export type ModalConfirm = {
    onConfirm: () => void;
    onCancel: () => void;
 };
+export type Chip = {
+   label: string;
+   color: string;
+   size?: string;
+};
 
 //LAYOUT
 export type DefaultLayout = {

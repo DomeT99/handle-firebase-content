@@ -13,6 +13,7 @@ export async function handleProjectRequest(project: ProjectDetails) {
       return {
          title: project.title!,
          description: project.description!,
+         active: project.active!,
          cover: coverRef,
          images: imagesRef
       };
