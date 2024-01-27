@@ -1,6 +1,7 @@
 import { collection, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { handleData, handleDeleteData } from './dashboardUtils';
+import { useHandleErrorStore } from '@/stores/handleErrorStore';
 import type { Project } from '@/types/projects';
 
 export async function getAllProjects(nameOfCollection: string) {
@@ -10,7 +11,7 @@ export async function getAllProjects(nameOfCollection: string) {
 
       return handleDocs;
    } catch (error) {
-      throw error;
+      useHandleErrorStore().handleError(error);
    }
 }
 
@@ -18,7 +19,7 @@ export async function deleteProject(project: Project) {
    try {
       await handleDeleteData(project, db);
    } catch (error) {
-      throw error;
+      useHandleErrorStore().handleError(error);
    }
 }
 
@@ -28,6 +29,6 @@ export async function setProjectStatus(project: Project) {
          active: !project.active
       });
    } catch (error) {
-      throw error;
+      useHandleErrorStore().handleError(error);
    }
 }
